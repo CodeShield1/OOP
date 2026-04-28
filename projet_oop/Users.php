@@ -14,6 +14,7 @@
     // create object
     $user1 = new user();
     // property
+    
     $user1->name = "Brahim";
     $user1->email = "brahim@gmail.com";
     // method
