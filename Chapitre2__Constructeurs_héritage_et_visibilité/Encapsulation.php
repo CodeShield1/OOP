@@ -97,14 +97,36 @@
                     "Name : .$this->salary";
         }
 
-          public function calculateSalary() {
+        public function calculateSalary() {
 
-        return $this->salary;
+            return $this->salary;
+        }
+        final public function companyPolicy() {
+
+              return "All employees must respect company rules";
+        }
+
     }
 
+    class Manager extends Employee {
+          private $bonus;
 
+        public function __construct($name , $salary,$bonus) {
+            parent::__construct($name , $salary);
+            $this->bonus=$bonus;
+        }
+        public function calculateSalary() {
+            return $this->salary + $this->bonus;
 
+            
+        }
+         
     }
+
+    $manager = new Manager("Brahim", 5000, 2000);
+    echo $manager->showInfo();
+    echo "Total Salary : " . $manager->calculateSalary() . "<br>";
+    echo $manager->companyPolicy();
 
 
 
