@@ -13,20 +13,22 @@ class User {
         $this->conn = $database->connect();
     }
 
+    
     // CREATE
     public function createUser($name, $email, $password) {
 
-        $sql = "INSERT INTO users (name, email, password)
-                VALUES (:name, :email, :password)";
+    $sql = "INSERT INTO users (name, email, password)
+            VALUES (:name, :email, :password)";
 
-        $stmt = $this->conn->prepare($sql);
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([
 
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":password", $password);
+        ":name" => $name,
+        ":email" => $email,
+        ":password" => $password
 
-        return $stmt->execute();
-    }
+    ]);
+}
 
     // READ
     public function getUsers() {
@@ -41,17 +43,18 @@ class User {
     public function updateUser($id, $name, $email) {
 
         $sql = "UPDATE users
-                SET name = :name,
-                    email = :email
-                WHERE id = :id";
+        SET name = :name,
+        email = :email
+        WHERE id = :id";
 
         $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
 
-        $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":email", $email);
+            ":id" => $id,
+            ":name" => $name,
+            ":email" => $email
 
-        return $stmt->execute();
+        ]);
     }
 
     // DELETE
@@ -61,9 +64,10 @@ class User {
                 WHERE id = :id";
 
         $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
 
-        $stmt->bindParam(":id", $id);
+            ":id" => $id
 
-        return $stmt->execute();
-    }
+        ]);
+   }
 }
